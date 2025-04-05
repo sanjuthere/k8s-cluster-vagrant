@@ -1,0 +1,7 @@
+# Ignore the .vagrant directory
+.vagrant/
+
+# Ignore large image files (example: files larger than 1MB)
+*.img
+*.iso
+ubuntu2204-generic-LTS-image
