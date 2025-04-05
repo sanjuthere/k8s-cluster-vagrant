@@ -32,14 +32,17 @@ sudo systemctl restart containerd
 sudo systemctl enable containerd
 
 # Add Kubernetes repo
-sudo apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
+sudo apt install -y apt-transport-https ca-certificates curl gpg
+VER=1.29
 
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+# sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v${VER}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-jammy main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo "echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v${VER}/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # Install Kubernetes components
 sudo apt update
-sudo apt install -y kubelet kubeadm kubectl
+sudo apt install wget curl vim git kubelet kubeadm kubectl -y
 sudo apt-mark hold kubelet kubeadm kubectl
+kubectl version --client
+kubeadm version
