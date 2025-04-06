@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, privileged: true, inline: $install_common_tools
 
   config.vm.define "master" do |master|
-    master.vm.box = "ubuntu/focal64"
+    master.vm.box = "./focal-server-cloudimg-amd64-vagrant.box"         ## ubuntu/focal64
     master.vm.hostname = "master"
     master.vm.network :private_network, ip: "10.0.0.10"
     master.vm.provision :shell, privileged: true, inline: $provision_master_node
@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
   ["worker1", "worker2"].each_with_index do |name, i|
     ip = "10.0.0.#{i + 11}"
     config.vm.define name do |worker|
-      worker.vm.box = "ubuntu/focal64"
+      worker.vm.box = "./focal-server-cloudimg-amd64-vagrant.box"     ## ubuntu/focal64
       worker.vm.hostname = name
       worker.vm.network :private_network, ip: ip
       worker.vm.provision :shell, privileged: true, inline: <<-SCRIPT

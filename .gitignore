@@ -5,3 +5,4 @@
 *.img
 *.iso
 ubuntu2204-generic-LTS-image
+focal-server-cloudimg-amd64-vagrant.box
